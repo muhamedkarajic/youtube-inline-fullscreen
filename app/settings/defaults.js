@@ -1,6 +1,6 @@
 // Define the default settings
 export const DEFAULT_SETTINGS = {
   autoEnable: false,
-  showButton: false,
+  showButton: true,
   fullscreenShortcut: 'f'
 };

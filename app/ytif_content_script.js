@@ -236,7 +236,7 @@
             if (showButton && window.location.pathname.includes('/watch')) {
                 if (
                     !document.querySelectorAll(".ytif-button").length
-                    && document.querySelectorAll(".ytp-right-controls").length
+                    && document.querySelectorAll(".ytp-right-controls-right").length
                 ) {
                     let button = document.createElement("button");
                     button.classList = "ytp-button ytif-button";
@@ -249,7 +249,7 @@
                     icon.classList = "ytif-fullscreen-button";
                     button.appendChild(icon);
 
-                    document.querySelector(".ytp-right-controls").prepend(button);
+                    document.querySelector(".ytp-right-controls-right").append(button);
                     button.addEventListener("mouseup", toggleFullScreen);
                 }
             }
