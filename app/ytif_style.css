@@ -12,11 +12,11 @@
 .ytif-fullscreen .ytp-size-button {
   display: none !important;
 }
-.ytif-fullscreen #masthead {
+.ytif-fullscreen #masthead-container {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
-.ytif-fullscreen #masthead.ytif-masthead-hidden {
+.ytif-fullscreen #masthead-container.ytif-masthead-container-hidden {
   opacity: 0;
   pointer-events: none;
 }

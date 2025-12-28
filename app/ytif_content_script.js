@@ -71,7 +71,7 @@
     addButton();
 
     // listen to keyboard shortcuts
-    document.body.addEventListener('keydown', shortcutListener);
+    document.body.addEventListener('keydown', shortcutListener, true);
 
     // observe settings object so that chainging options such as "Show Player Button" is applied immediately
     chrome.storage.onChanged.addListener((changes, areaName) => {
@@ -119,25 +119,13 @@
     let inactivityTimeout;
     let playerObject;
 
-    const masthead = document.getElementById('masthead');
+    const masthead = document.getElementById('masthead-container');
 
     function enableMastheadAutoHide() {
-
         if (!playerObject) {
             playerObject = document.querySelector('.video-stream');
         }
-
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseleave', onMouseLeave);
-        document.addEventListener('focusin', onFocusIn);
-        document.addEventListener('focusout', onFocusOut);
-
-        if (!isPlayerPaused()) {
-            startInactivityTimer();
-        }
-
-        playerObject.addEventListener('play', handleMastheadPlay);
-        playerObject.addEventListener('pause', handleMastheadPause);
+        hideMasthead();
     }
 
     function disableMastheadAutoHide() {
@@ -179,7 +167,7 @@
     }
 
     function showMasthead() {
-        if (masthead) masthead.classList.remove('ytif-masthead-hidden');
+        if (masthead) masthead.classList.remove('ytif-masthead-container-hidden');
     }
 
     function hideMasthead() {
@@ -189,7 +177,7 @@
             startInactivityTimer();
         } else {
             if (masthead) {
-                masthead.classList.add('ytif-masthead-hidden');
+                masthead.classList.add('ytif-masthead-container-hidden');
             }
         }
     }
@@ -291,6 +279,10 @@
         ) {
             switch (event.key) {
                 case globalSettings.fullscreenShortcut:
+                    if(globalSettings.fullscreenShortcut === 'f') {
+                        event.stopImmediatePropagation();
+                        event.preventDefault();
+                    }
                     toggleFullScreen();
                     break;
                 case 't':
@@ -408,4 +400,12 @@
         }
     }
 
+    document.addEventListener('dblclick', e => {
+        const video = document.querySelector('.video-stream');
+        if (video && (e.target === video || video.contains(e.target))) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            toggleFullScreen();
+        }
+    }, true);
 })(chrome);

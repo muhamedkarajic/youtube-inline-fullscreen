@@ -16,11 +16,11 @@
 		display: none !important;
 	}
 
-	#masthead {
+	#masthead-container {
 		opacity: 1;
 		transition: opacity 0.3s ease;
 
-		&.ytif-masthead-hidden {
+		&.ytif-masthead-container-hidden {
 			opacity: 0;
 			pointer-events: none;
 		}
