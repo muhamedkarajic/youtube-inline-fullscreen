@@ -292,6 +292,11 @@
                         event.stopPropagation();
                     }
                     break;
+                case 'Escape': 
+                    if (!isFullscreen())
+                        return;
+                    toggleFullScreen();
+                break;
             }
         }
     }
